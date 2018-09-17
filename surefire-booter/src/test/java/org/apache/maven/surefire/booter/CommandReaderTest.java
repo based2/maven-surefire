@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -247,7 +248,7 @@ public class CommandReaderTest
             .putInt( MasterProcessCommand.RUN_CLASS.getId() )
             .putInt( clazz.length )
             .put( clazz );
-        buffer.rewind();
+        ((Buffer) buffer).rewind();
         for ( ; buffer.hasRemaining(); )
         {
             blockingStream.add( buffer.get() );
@@ -260,7 +261,7 @@ public class CommandReaderTest
         ByteBuffer buffer = ByteBuffer.allocate( 8 )
                 .putInt( MasterProcessCommand.TEST_SET_FINISHED.getId() )
                 .putInt( 0 );
-        buffer.rewind();
+        ((Buffer) buffer).rewind();
         for ( ; buffer.hasRemaining(); )
         {
             blockingStream.add( buffer.get() );
